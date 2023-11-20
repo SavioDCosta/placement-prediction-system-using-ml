@@ -1,0 +1,142 @@
+<html>
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width = device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+        function validateForm() {
+            
+            // Check for email
+            if(! /[\w]+@[\w]+\.[\w]{3}/.test(document.register_form.Email.value)){
+                // Validate email
+                alert("Please enter a valid email.");
+                return false;
+            }
+
+
+            arr = [];
+            s_arr = document.register_form.PhoneNumber.value.split(',');
+            for(var i=0; i < s_arr.length; i++){
+                
+                elem = s_arr[i];
+                elem = elem.trim();
+
+                if(elem){
+                console.log('a' + elem.trim() + 'a\n');
+
+                if(/^[\d]{10,10}$/.test(elem) ){
+                    // valid num
+                    arr.push(elem.trim());
+                } 
+                else {
+                    // invalid num
+                    alert(elem + ' is not valid 10 digit number!');
+                    return false;
+                    }
+                }
+            }
+
+            // Put correct formatted value in input so POST receieves it correctly
+            document.register_form.PhoneNumber.value = arr.join('|');
+
+            return true;
+        }
+    </script>
+</head>
+<body style="background-color: #000000">
+        <div class="container">
+            <div class="col-sm-10" style="width: 550px; margin-left: 300px; margin-top: 50px;">
+
+        <div class="jumbotron">
+
+        <div class="form-group form-check" style="margin-top: -50px;">
+
+            <h1 style="margin-left: 125px;">Sign Up</h1>
+
+<hr>
+    <form name="register_form" action="<?= $_SERVER['PHP_SELF']?>" method="POST" onsubmit="return validateForm();" class="form-horizontal" style="margin-left: 50px;">
+
+        <div class="form-group input-group">
+            <p>Name:
+                <input type="text" name="Name" required class="form-control" placeholder="Enter Name" style="width: 300px;border-radius: 15px">                                                                                                 
+            </p>
+        </div>
+        
+        <div class="form-group input-group">
+            <p>PID:
+                <input type="number" name="PID" required class="form-control" placeholder="Enter PID" style="width: 300px;border-radius: 15px">
+        </div>
+        
+        <div class="form-group input-group">    
+            <p>Enter Attendance:</p>
+            <div class="row">
+                <div class="col-lg-4"><p>Sem I</p>
+                    <input type="number" name="a1" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem II</p>
+                    <input type="number" name="a2" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem III</p>
+                    <input type="number" name="a3" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem IV</p>
+                    <input type="number" name="a4" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem V</p>
+                    <input type="number" name="a5" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem VI</p>
+                    <input type="number" name="a6" required class="form-control"   style="width: 50px; border-radius: 15px">
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="form-group input-group">    
+            <p>Enter GPA:</p>
+            <div class="row">
+                <div class="col-lg-4"><p>Sem I</p>
+                    <input type="number" name="g1" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem II</p>
+                    <input type="number" name="g2" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem III</p>
+                    <input type="number" name="g3" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem IV</p>
+                    <input type="number" name="g4" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem V</p>
+                    <input type="number" name="g5" required class="form-control"   style="width: 50px; border-radius: 15px"></div>
+                <div class="col-lg-4"><p>Sem VI</p>
+                    <input type="number" name="g6" required class="form-control"   style="width: 50px; border-radius: 15px">
+                </div>
+            </div>
+        </div>
+        
+        <div class="md-form form-group input-group date">
+            <p>Date of Birth: 
+                <input type="date" name="DOB" required class="form-control" placeholder="Enter Date in dd/mm/yyyy format" style="width: 300px;border-radius: 15px">
+            </p>
+        </div>
+
+        <div class="form-group input-group">
+            <p>Password: 
+                <input type="password" name="Password" required class="form-control" placeholder="Enter Password" style="width: 300px;border-radius: 15px">
+            </p>
+        </div>
+        
+        <div class="form-group input-group">
+            <p>Contact No: (Separated with ',')
+                <input type="text" name="PhoneNumber" required class="form-control" placeholder="Enter Contact No" style="width: 300px; border-radius: 15px">
+            </p>
+        </div>
+        
+        <div class="form-group input-group">
+            <p>
+                <input type="submit" value="Submit" class="form-control btn btn btn-primary custom-btn" style="width: 300px; background-color: #001064; border-color: #001064; border-radius: 15px">
+            </p>
+        </div>
+
+    </form>
+    </div>
+</div>
+</div>
+</body>
+</html>
